@@ -96,7 +96,7 @@ class StyleGANGenerator(BaseGenerator):
 
     self.load()
 
-  def sample(self, num):
+  def sample(self, num, latent_space_type='Z'):
     """Samples latent codes randomly.
 
     Args:
@@ -106,11 +106,17 @@ class StyleGANGenerator(BaseGenerator):
       A `numpy.ndarray` as sampled latend codes.
 
     """
-    latent_codes = np.random.randn(num, self.latent_space_dim)
+    latent_space_type = latent_space_type.upper()
+    if latent_space_type == 'Z':
+      latent_codes = np.random.randn(num, self.latent_space_dim)
+    elif latent_space_type == 'W':
+      latent_codes = np.random.randn(num, self.w_space_dim)
+    else:
+      raise ValueError(f'Latent space type `{latent_space_type}` is invalid!')
 
     return latent_codes.astype(np.float32)
 
-  def preprocess(self, latent_codes):
+  def preprocess(self, latent_codes, latent_space_type='Z'):
     """Preprocesses the input latent code if needed.
 
     Args:
@@ -123,17 +129,24 @@ class StyleGANGenerator(BaseGenerator):
     if not isinstance(latent_codes, np.ndarray):
       raise ValueError(f'Latent codes should be with type `numpy.ndarray`!')
 
-    latent_codes = latent_codes.reshape(-1, self.latent_space_dim)
-    norm = np.linalg.norm(latent_codes, axis=1, keepdims=True)
-    latent_codes = latent_codes / norm * np.sqrt(self.latent_space_dim)
+    latent_space_type = latent_space_type.upper()
+    if latent_space_type == 'Z':
+      latent_codes = latent_codes.reshape(-1, self.latent_space_dim)
+      norm = np.linalg.norm(latent_codes, axis=1, keepdims=True)
+      latent_codes = latent_codes / norm * np.sqrt(self.latent_space_dim)
+    elif latent_space_type == 'W':
+      latent_codes = latent_codes.reshape(-1, self.w_space_dim)
+    else:
+      raise ValueError(f'Latent space type `{latent_space_type}` is invalid!')
 
     return latent_codes.astype(np.float32)
 
-  def easy_sample(self, num):
-    return self.preprocess(self.sample(num))
+  def easy_sample(self, num, latent_space_type='Z'):
+    return self.preprocess(self.sample(num, latent_space_type),latent_space_type)
 
   def synthesize(self,
                  latent_codes,
+                 latent_space_type='Z',
                  generate_style=False,
                  generate_image=True):
     """Synthesizes images with given latent codes.
@@ -155,21 +168,44 @@ class StyleGANGenerator(BaseGenerator):
 
     results = {}
 
+    latent_space_type = latent_space_type.upper()
     latent_codes_shape = latent_codes.shape
 
-    if not (len(latent_codes_shape) == 2 and
+    # Generate from Z space.
+    if latent_space_type == 'Z':
+      if not (len(latent_codes_shape) == 2 and
               latent_codes_shape[0] <= self.batch_size and
               latent_codes_shape[1] == self.latent_space_dim):
-      raise ValueError(f'Latent_codes should be with shape [batch_size, '
+        raise ValueError(f'Latent_codes should be with shape [batch_size, '
                          f'latent_space_dim], where `batch_size` no larger '
                          f'than {self.batch_size}, and `latent_space_dim` '
                          f'equal to {self.latent_space_dim}!\n'
                          f'But {latent_codes_shape} received!')
-    zs = torch.from_numpy(latent_codes).type(torch.FloatTensor)
-    zs = zs.to(self.run_device)
-    ws = self.model.mapping(zs)
-    wps = self.model.truncation(ws)
-    results['z'] = latent_codes
+      zs = torch.from_numpy(latent_codes).type(torch.FloatTensor)
+      zs = zs.to(self.run_device)
+      ws = self.model.mapping(zs)
+      wps = self.model.truncation(ws)
+      results['z'] = latent_codes
+      results['w'] = self.get_value(ws)
+      results['wp'] = self.get_value(wps)
+
+    # Generate from W space.
+    elif latent_space_type == 'W':
+      if not (len(latent_codes_shape) == 2 and
+              latent_codes_shape[0] <= self.batch_size and
+              latent_codes_shape[1] == self.w_space_dim):
+        raise ValueError(f'Latent_codes should be with shape [batch_size, '
+                         f'w_space_dim], where `batch_size` no larger than '
+                         f'{self.batch_size}, and `w_space_dim` equal to '
+                         f'{self.w_space_dim}!\n'
+                         f'But {latent_codes_shape} received!')
+      ws = torch.from_numpy(latent_codes).type(torch.FloatTensor)
+      ws = ws.to(self.run_device)
+      wps = self.model.truncation(ws)
+      results['w'] = latent_codes
+      results['wp'] = self.get_value(wps)
+    else:
+      raise ValueError(f'Latent space type `{latent_space_type}` is invalid!')
 
     if generate_style:
       for i in range(self.num_layers):

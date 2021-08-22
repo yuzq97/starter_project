@@ -10,11 +10,9 @@ import os.path
 import argparse
 import cv2
 import numpy as np
-from tqdm import tqdm
 
 from models.model_settings import MODEL_POOL
 from models.stylegan_generator import StyleGANGenerator
-from utils.logger import setup_logger
 from utils.manipulator import linear_interpolate
 
 
@@ -36,6 +34,9 @@ def parse_args():
                       help='Number of images for editing. This field will be '
                            'ignored if `input_latent_codes_path` is specified. '
                            '(default: 1)')
+  parser.add_argument('-s', '--latent_space_type', type=str, default='z',
+                      choices=['z', 'Z', 'w', 'W'],
+                      help='Latent space used in Style GAN. (default: `Z`)')
   parser.add_argument('--start_distance', type=float, default=-3.0,
                       help='Start point for manipulation in latent space. '
                            '(default: -3.0)')
@@ -51,10 +52,10 @@ def parse_args():
 def main():
   """Main function."""
   args = parse_args()
-  logger = setup_logger(args.output_dir, logger_name='generate_data')
 
   print('Initializing generator.\n')
   model = StyleGANGenerator(args.model_name)
+  kwargs = {'latent_space_type': args.latent_space_type}
 
   print('Preparing boundary.\n')
   if not os.path.isfile(args.boundary_path):
@@ -66,10 +67,10 @@ def main():
   if os.path.isfile(args.input_latent_codes_path):
     print(f'Load latent codes from `{args.input_latent_codes_path}`.\n')
     latent_codes = np.load(args.input_latent_codes_path)
-    latent_codes = model.preprocess(latent_codes)
+    latent_codes = model.preprocess(latent_codes,**kwargs)
   else:
     print(f'Sample latent codes randomly.\n')
-    latent_codes = model.easy_sample(args.num)
+    latent_codes = model.easy_sample(args.num, **kwargs)
   np.save(os.path.join(args.output_dir, 'latent_codes.npy'), latent_codes)
   total_num = latent_codes.shape[0]
 
@@ -82,7 +83,7 @@ def main():
                                         steps=args.steps)
     interpolation_id = 0
     for interpolations_batch in model.get_batch_inputs(interpolations):
-      outputs = model.easy_synthesize(interpolations_batch)
+      outputs = model.easy_synthesize(interpolations_batch, **kwargs)
       for image in outputs['image']:
         save_path = os.path.join(args.output_dir,
                                  f'{sample_id:03d}_{interpolation_id:03d}.jpg')
