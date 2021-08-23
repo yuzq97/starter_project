@@ -60,13 +60,8 @@ def main():
   np.save(os.path.join(args.output_dir, 'boundary.npy'), boundary)
 
   print('Preparing latent codes.\n')
-  if os.path.isfile(args.input_latent_codes_path):
-    print(f'Load latent codes from `{args.input_latent_codes_path}`.\n')
-    latent_codes = np.load(args.input_latent_codes_path)
-    latent_codes = model.preprocess(latent_codes,**kwargs)
-  else:
-    print(f'Sample latent codes randomly.\n')
-    latent_codes = model.easy_sample(args.num, **kwargs)
+  print(f'Sample latent codes randomly.\n')
+  latent_codes = model.easy_sample(args.num, **kwargs)
   np.save(os.path.join(args.output_dir, 'latent_codes.npy'), latent_codes)
   total_num = latent_codes.shape[0]
 

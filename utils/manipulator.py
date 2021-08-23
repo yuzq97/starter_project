@@ -1,6 +1,8 @@
 """Utility functions for latent codes manipulation."""
 
 import numpy as np
+import argparse
+import os.path
 
 __all__ = ['project_boundary', 'linear_interpolate']
 
@@ -103,3 +105,35 @@ def linear_interpolate(latent_code,
   raise ValueError(f'Input `latent_code` should be with shape '
                    f'[1, latent_space_dim] \n'
                    f'But {latent_code.shape} is received.')
+
+
+def parse_args():
+  """Parses arguments."""
+  parser = argparse.ArgumentParser(
+      description='Edit image synthesis with given semantic boundary.')
+  parser.add_argument('-p', '--primal', type=str, required=True,
+                      help='Path to the primal boundary. (required)')
+  parser.add_argument('-o', '--output_dir', type=str, required=True,
+                      help='Directory to save the output results. (required)')
+  parser.add_argument('-f', '--first_condition', type=str,
+                      help='Path to the first condition boundary.')
+  parser.add_argument('-s', '--second_condition', type=str,
+                      help='Path to the second condition boundary.')
+
+  return parser.parse_args()
+
+if __name__=='__main__':
+  args = parse_args()
+  if args.first_condition:
+    primal = np.load(args.primal)
+    if args.second_condition:
+      first = np.load(args.first_condition)
+      second = np.load(args.second_condition)
+      projected = project_boundary(primal, first, second)
+    else:
+      first = np.load(args.first_condition)
+      projected = project_boundary(primal, first)
+      np.save(os.path.join(args.output_dir, 'boundary.npy'), projected)
+  else:
+    print('There should be at least one condition boundary!')
+
