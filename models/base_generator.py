@@ -1,5 +1,3 @@
-"""Contains the base class for generator."""
-
 import os
 import numpy as np
 
