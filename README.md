@@ -8,7 +8,7 @@ I implemented both approaches based on the work of InterFaceGan, and a demo can 
 
 ## Instructions for Use of edit.py
 
-Please download StyleGAN models from https://github.com/NVlabs/stylegan, and then put them under `pretrain/`. Both StyleGAN models trained on CelebA-HQ and FFHQ dataset are supported.
+Please download StyleGAN models from https://github.com/NVlabs/stylegan, and then put them under `models/pretrain/`. Both StyleGAN models trained on CelebA-HQ and FFHQ dataset are supported.
 
 ### Arguments:
 
