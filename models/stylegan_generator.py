@@ -144,9 +144,7 @@ class StyleGANGenerator(BaseGenerator):
 
   def synthesize(self,
                  latent_codes,
-                 latent_space_type='Z',
-                 generate_style=False,
-                 generate_image=True):
+                 latent_space_type='Z'):
     """Synthesizes images with given latent codes.
 
     One can choose whether to generate the layer-wise style codes.
