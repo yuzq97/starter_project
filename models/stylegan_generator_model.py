@@ -3,9 +3,6 @@
 Different from the official tensorflow model in folder `stylegan_tf_official`,
 this is a simple pytorch version which only contains the generator part. This
 class is specially used for inference.
-
-For more details, please check the original paper:
-https://arxiv.org/pdf/1812.04948.pdf
 """
 
 from collections import OrderedDict

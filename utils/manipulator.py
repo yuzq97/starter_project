@@ -76,11 +76,6 @@ def linear_interpolate(latent_code,
   code is `end_distance` away from the given `boundary`. Remaining latent codes
   are linearly interpolated.
 
-  Input `latent_code` can also be with shape [1, num_layers, latent_space_dim]
-  to support W+ space in Style GAN. In this case, all features in W+ space will
-  be manipulated same as each other. Accordingly, the output will be with shape
-  [10, num_layers, latent_space_dim].
-
   NOTE: Distance is sign sensitive.
 
   Args:
@@ -106,6 +101,5 @@ def linear_interpolate(latent_code,
     linspace = linspace.reshape(-1, 1, 1).astype(np.float32)
     return latent_code + linspace * boundary.reshape(1, 1, -1)
   raise ValueError(f'Input `latent_code` should be with shape '
-                   f'[1, latent_space_dim] or [1, N, latent_space_dim] for '
-                   f'W+ space in Style GAN!\n'
+                   f'[1, latent_space_dim] \n'
                    f'But {latent_code.shape} is received.')

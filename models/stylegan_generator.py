@@ -1,6 +1,6 @@
 """Contains the generator class of StyleGAN.
 
-Basically, this class is derived from the `BaseGenerator` class defined in
+this class is derived from the `BaseGenerator` class defined in
 `base_generator.py`.
 """
 
@@ -46,8 +46,6 @@ class StyleGANGenerator(BaseGenerator):
       state_dict[var_name] = self.model.state_dict()[var_name]
     self.model.load_state_dict(state_dict)
     print(f'Successfully loaded!')
-    # self.lod = self.model.synthesis.lod.to(self.cpu_device).tolist()
-    # print(f'  `lod` of the loaded model is {self.lod}.')
 
   def convert_tf_model(self, test_num=10):
     import sys
@@ -155,10 +153,6 @@ class StyleGANGenerator(BaseGenerator):
 
     Args:
       latent_codes: Input latent codes for image synthesis.
-      generate_style: Whether to generate the layer-wise style codes. (default:
-        False)
-      generate_image: Whether to generate the final image synthesis. (default:
-        True)
 
     Returns:
       A dictionary whose values are raw outputs from the generator.
@@ -207,14 +201,7 @@ class StyleGANGenerator(BaseGenerator):
     else:
       raise ValueError(f'Latent space type `{latent_space_type}` is invalid!')
 
-    if generate_style:
-      for i in range(self.num_layers):
-        style = self.model.synthesis.__getattr__(
-            f'layer{i}').epilogue.style_mod.dense(wps[:, i, :])
-        results[f'style{i:02d}'] = self.get_value(style)
-
-    if generate_image:
-      images = self.model.synthesis(wps)
-      results['image'] = self.get_value(images)
+    images = self.model.synthesis(wps)
+    results['image'] = self.get_value(images)
 
     return results

@@ -1,6 +1,4 @@
 """Contains basic configurations for models used in this project.
-
-NOTE: Any new model should be registered in `MODEL_POOL` before using.
 """
 
 import os.path
