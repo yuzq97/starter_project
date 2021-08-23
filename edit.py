@@ -27,12 +27,8 @@ def parse_args():
                       help='Directory to save the output results. (required)')
   parser.add_argument('-b', '--boundary_path', type=str, required=True,
                       help='Path to the semantic boundary. (required)')
-  parser.add_argument('-i', '--input_latent_codes_path', type=str, default='',
-                      help='If specified, will load latent codes from given '
-                           'path instead of randomly sampling. (optional)')
   parser.add_argument('-n', '--num', type=int, default=1,
-                      help='Number of images for editing. This field will be '
-                           'ignored if `input_latent_codes_path` is specified. '
+                      help='Number of images for editing. '
                            '(default: 1)')
   parser.add_argument('-s', '--latent_space_type', type=str, default='z',
                       choices=['z', 'Z', 'w', 'W'],

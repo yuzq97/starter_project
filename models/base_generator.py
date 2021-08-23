@@ -1,8 +1,6 @@
 """Contains the base class for generator."""
 
 import os
-import sys
-import logging
 import numpy as np
 
 import torch
