@@ -147,8 +147,6 @@ class StyleGANGenerator(BaseGenerator):
                  latent_space_type='Z'):
     """Synthesizes images with given latent codes.
 
-    One can choose whether to generate the layer-wise style codes.
-
     Args:
       latent_codes: Input latent codes for image synthesis.
 
