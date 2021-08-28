@@ -130,6 +130,7 @@ if __name__=='__main__':
       first = np.load(args.first_condition)
       second = np.load(args.second_condition)
       projected = project_boundary(primal, first, second)
+      np.save(os.path.join(args.output_dir, 'boundary.npy'), projected)
     else:
       first = np.load(args.first_condition)
       projected = project_boundary(primal, first)
