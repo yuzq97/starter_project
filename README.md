@@ -31,51 +31,51 @@ Before use, please first download StyleGAN models from https://github.com/NVlabs
 In this project, I examined five prominent facial attributes: age, gender, eyeglasses, pose, and smile. To determine which of the two disentaglement methods achieves better effect, I used the same set of images for them to edit. The results are as follows:
 
 ### 1. Age
-![image](./images/age_v_eyeglasses/z1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space*
-![image](./images/age_v_eyeglasses/w1.png)
-**Figure:** *result of editing in $\mathcal{W}$ space*
-![image](./images/age_v_eyeglasses/c1.png)
+![image](./images/age_v_eyeglasses/z1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space* \
+![image](./images/age_v_eyeglasses/w1.png) \
+**Figure:** *result of editing in $\mathcal{W}$ space* \
+![image](./images/age_v_eyeglasses/c1.png) \
 **Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses*
 
 ### 2. Gender
-![image](./images/gender_v_age/z1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space*
-![image](./images/gender_v_eyeglasses/w1.png)
-**Figure:** *result of editing in $\mathcal{W}$ space*
-![image](./images/gender_v_age/c1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on age*
-![image](./images/gender_v_eyeglasses/c1.png)
+![image](./images/gender_v_age/z1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space* \
+![image](./images/gender_v_eyeglasses/w1.png) \
+**Figure:** *result of editing in $\mathcal{W}$ space* \
+![image](./images/gender_v_age/c1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on age* \
+![image](./images/gender_v_eyeglasses/c1.png) \
 **Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses*
 
 ### 3. Eyeglasses
-![image](./images/eyeglasses_v_gender/z1.png)
-**Figure:** *result of editing in $\mathcal{Z}$*
-![image](./images/eyeglasses_v_gender/w1.png)
-**Figure:** *result of editing in $\mathcal{W}$*
-![image](./images/eyeglasses_v_smile/c1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on smile*
-![image](./images/eyeglasses_v_age/c2.png)
+![image](./images/eyeglasses_v_gender/z1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space* \
+![image](./images/eyeglasses_v_gender/w1.png) \
+**Figure:** *result of editing in $\mathcal{W}$ space* \
+![image](./images/eyeglasses_v_smile/c1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on smile* \
+![image](./images/eyeglasses_v_age/c2.png) \
 **Figure:** *result of editing in $\mathcal{Z}$ space conditioned on age*
 
 ### 4. Pose
-![image](./images/pose_v_eyeglasses/z1.png)
-**Figure:** *result of editing in $\mathcal{Z}$*
-![image](./images/pose_v_eyeglasses/w1.png)
-**Figure:** *result of editing in $\mathcal{W}$*
-![image](./images/pose_v_eyeglasses/c1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses*
-![image](./images/pose_v_smile/c1.png)
+![image](./images/pose_v_eyeglasses/z1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space* \
+![image](./images/pose_v_eyeglasses/w1.png) \
+**Figure:** *result of editing in $\mathcal{W}$ space* \
+![image](./images/pose_v_eyeglasses/c1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses* \
+![image](./images/pose_v_smile/c1.png) \
 **Figure:** *result of editing in $\mathcal{Z}$ space conditioned on smile*
 
 ### 5. Smile
-![image](./images/smile_v_eyeglasses/z1.png)
-**Figure:** *result of editing in $\mathcal{Z}$*
-![image](./images/smile_v_eyeglasses/w1.png)
-**Figure:** *result of editing in $\mathcal{W}$*
-![image](./images/smile_v_eyeglasses/c1.png)
-**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses*
-![image](./images/smile_v_gender/c1.png)
+![image](./images/smile_v_eyeglasses/z1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space* \
+![image](./images/smile_v_eyeglasses/w1.png) \
+**Figure:** *result of editing in $\mathcal{W}$ space* \
+![image](./images/smile_v_eyeglasses/c1.png) \
+**Figure:** *result of editing in $\mathcal{Z}$ space conditioned on eyeglasses* \
+![image](./images/smile_v_gender/c1.png) \
 **Figure:** *result of editing in $\mathcal{Z}$ space conditioned on gender*
 
 \
