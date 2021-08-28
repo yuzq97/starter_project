@@ -6,6 +6,5 @@ __pycache__/
 *.npy
 log.txt
 
-/results/
 /models/pretrain/
 !/boundaries/*.npy
