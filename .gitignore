@@ -1,10 +1,10 @@
 __pycache__/
 
 *.jpg
-*.png
 *.jpeg
 *.npy
 log.txt
 
+/results/
 /models/pretrain/
 !/boundaries/*.npy
