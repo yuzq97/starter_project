@@ -2,7 +2,7 @@
 
 For this starter project, I played with the latent space of StyleGAN (Karras *et al.*, CVPR 2019) and made an attempt at tackling the disentanglement of facial attributes, a task discussed in the original StyleGAN paper. The goal is to turn an unconditionally trained GAN model into a controllable one, which means that the model can edit a particular facial attribute without affecting another.
 
-While the StyleGAN paper has already found that the intermediate latent space *W* is less entagled by *Z*, there exists another approach proposed in the CVPR paper "Interpreting the Latent Space of GANs for Semantic Face Editing" ((Shen *et al.*, CVPR 2020)) called "conditional manipulation". The authors of the paper first prove that the latent space *Z* of StyleGAN is separable by a hyperplane given any facial attributes, and then find a projected direction along which moving the latent code changes attribute A without affecting attribute B.
+While the StyleGAN paper has already found that the intermediate latent space *W* is less entagled by *Z*, there exists another approach proposed in the CVPR paper "Interpreting the Latent Space of GANs for Semantic Face Editing" (Shen *et al.*, CVPR 2020) called "conditional manipulation". The authors of the paper first prove that the latent space *Z* of StyleGAN is separable by a hyperplane given any facial attributes, and then find a projected direction along which moving the latent code changes attribute A without affecting attribute B.
 
 The purpose of this project is thus to try my hand at using a GAN model for face editing, and do a little compare-and-contrast between the two disentanglement methods. A Colab demo can be found [here](https://colab.research.google.com/github/yuzq97/starter_project/blob/main/demo.ipynb).
 
@@ -84,7 +84,7 @@ We can see that conditional manipulation in *Z* space performs well on age, but 
 On the other hand, manipulation in *W* space is quite consistent in producing the desired images. It is outperformed by conditional manipulation only when editing eyeglasses, as the resulting image from conditional manipulation seems more natural. In fact, the major advantage of using condition manipulation is that it generally produces images that look more like a real person. The reason why manipulation in *W* space is less able to do so may be explained by the progressive growing technique that StyleGAN uses, as Karras *et al.* explain that "the progressively grown generator appears to have a strong location preference for details...when features like teeth or eyes should move smoothly over the image, they may instead remain stuck in place before jumping to the next preferred location".
 
 ## Future Work
-When time permits, it is worth 1) training boundaries on my own to see if I can get more accurate boundaries that achieve better results from conditional manipulation 2) using StyleGAN2 to improve the image quality from manipulation in *W* space. 
+When time permits, it is worth 1) training boundaries on my own to see if I can get more accurate boundaries that achieve better results from conditional manipulation 2) using StyleGAN2 or other GAN models such as BigGAN to improve the image quality. 
 
 ## References
 - [A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/pdf/1812.04948.pdf), Karras *et al.*, CVPR 2019
