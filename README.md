@@ -13,7 +13,7 @@ The Tensorflow version of StyleGAN requires a GPU to run, but thanks to the work
 ## Training Process
 The training part of this projects involves finding boundaries for various facial attributes, both unconditioned and conditional ones. Training unconditioned boundaries requires an attribute score predictor, so I used the pre-trained unconditioned boundaries to avoid over complicate the work. I was then able to generate myself a handful of conditional boundaries using the function `project_boundary()` in `utils/manipulator.py`, which takes in a primal boundary and another one or two boundaries, and returns the modified primal boundary conditioned on the other boundaries.
 
-## Using edit.py
+## Using face_edit.py
 
 This script is for face editing on local machines. Before use, please first download StyleGAN models from https://github.com/NVlabs/stylegan, and then put them under `models/pretrain/`. Both StyleGAN models trained on CelebA-HQ and FFHQ dataset are supported.
 
