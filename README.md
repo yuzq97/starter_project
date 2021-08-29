@@ -28,7 +28,7 @@ Before use, please first download StyleGAN models from https://github.com/NVlabs
 -s: Latent space used in StyleGAN, either "W" or "Z". ("Z" by default)
 
 ## Results
-In this project, I examined five prominent facial attributes: age, gender, eyeglasses, pose, and smile. To determine which of the two disentaglement methods achieves better effect, I used the same set of images for them to edit. The results are as follows:
+In this project, I examined five prominent facial attributes: age, gender, eyeglasses, pose, and smile. To determine which of the two disentaglement methods achieves better effect, I used both methods on the same set of images generated from StyleGAN model trained on the FFHQ dataset. The results are as follows:
 
 ### 1. Age
 ![image](./images/age_v_eyeglasses/z1.png) \
