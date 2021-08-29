@@ -1,11 +1,3 @@
-"""Edits latent codes with respect to given boundary.
-
-Basically, this file takes latent codes and a semantic boundary as inputs, and
-then shows how the image synthesis will change if the latent codes is moved
-towards the given boundary.
-
-"""
-
 import os.path
 import argparse
 import cv2
