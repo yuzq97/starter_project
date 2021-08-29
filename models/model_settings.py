@@ -1,6 +1,3 @@
-"""Contains basic configurations for models used in this project.
-"""
-
 import os.path
 
 BASE_DIR = os.path.dirname(os.path.relpath(__file__))

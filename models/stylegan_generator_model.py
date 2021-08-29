@@ -1,10 +1,3 @@
-"""Contains the implementation of generator described in StyleGAN.
-
-Different from the official tensorflow model in folder `stylegan_tf_official`,
-this is a simple pytorch version which only contains the generator part. This
-class is specially used for inference.
-"""
-
 from collections import OrderedDict
 import numpy as np
 

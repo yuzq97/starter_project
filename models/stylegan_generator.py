@@ -1,9 +1,3 @@
-"""Contains the generator class of StyleGAN.
-
-this class is derived from the `BaseGenerator` class defined in
-`base_generator.py`.
-"""
-
 import os
 import numpy as np
 

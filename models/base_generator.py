@@ -8,10 +8,6 @@ from . import model_settings
 __all__ = ['BaseGenerator']
 
 class BaseGenerator(object):
-  """Base class for generator used in GAN variants.
-
-  NOTE: The model should be defined with pytorch, and only used for inference.
-  """
 
   def __init__(self, model_name, logger=None):
     """Initializes with specific settings.

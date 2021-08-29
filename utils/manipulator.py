@@ -1,5 +1,3 @@
-"""Utility functions for latent codes manipulation."""
-
 import numpy as np
 import argparse
 import os.path
@@ -9,7 +7,7 @@ __all__ = ['project_boundary', 'linear_interpolate']
 def project_boundary(primal, *args):
   """Projects the primal boundary onto condition boundaries.
 
-  all input boundaries are supposed to have already been normalized to unit
+  All input boundaries are supposed to have already been normalized to unit
   norm, and with same shape [1, latent_space_dim].
   
   Args:
@@ -78,8 +76,6 @@ def linear_interpolate(latent_code,
   code is `end_distance` away from the given `boundary`. Remaining latent codes
   are linearly interpolated.
 
-  NOTE: Distance is sign sensitive.
-
   Args:
     latent_code: The input latent code for manipulation.
     boundary: The semantic boundary as reference.
@@ -123,6 +119,7 @@ def parse_args():
   return parser.parse_args()
 
 if __name__=='__main__':
+  """Find conditional boundaries and save them as npy files."""
   args = parse_args()
   if args.first_condition:
     primal = np.load(args.primal)
