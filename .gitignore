@@ -5,6 +5,7 @@ __pycache__/
 *.npy
 log.txt
 
+/.vscode/
 /results/
 /models/pretrain/
 !/boundaries/*.npy
