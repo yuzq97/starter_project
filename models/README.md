@@ -1,0 +1,4 @@
+- `base_generator.py` : base class for generator of GAN models.
+- `stylegan_generator.py` : the generator class of StyleGAN derived from the `BaseGenerator` class.
+- `stylegan_generator.py` : the Pytorch implementation of the generator in StyleGAN.
+- `model_settings.py` : basic configurations for models used in this project.

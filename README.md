@@ -1,4 +1,4 @@
-# An Attempt to Manipulate the Latent Space of GANs for Semantic Face Editing
+# Starter Project: An Attempt to Manipulate the Latent Space of GANs for Semantic Face Editing
 
 For this starter project, I played with the latent space of StyleGAN (Karras *et al.*, CVPR 2019) and made an attempt at tackling the disentanglement of facial attributes, a task discussed in the original StyleGAN paper. The goal is to turn an unconditionally trained GAN model into a controllable one, which means that the model can edit a particular facial attribute without affecting another.
 
