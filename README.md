@@ -8,7 +8,7 @@ The purpose of this project is thus to try my hand at using a GAN model for face
 
 ## Model for Face Generation
 
-The Tensorflow version of StyleGAN requires a GPU to run, but thanks to the work by Shen *et al.*, I was able to use a PyTorch version of it which supports running on CPU. The model first loads the weights from the pre-trained StyleGAN, randomly samples latent codes which is then linearly interpolated with respect to the given boundary, and finally synthesizes result images from the new latent code.
+The offical Tensorflow version of StyleGAN requires a GPU to run, but thanks to the work by Shen *et al.*, I was able to use a PyTorch version of it which supports running on CPU. The model first loads the weights from the pre-trained StyleGAN, randomly samples latent codes which is then linearly interpolated with respect to the given boundary, and finally synthesizes result images from the new latent code.
 
 ## Training Process
 The training part of this projects involves finding boundaries for various facial attributes, both unconditioned and conditional ones. Training unconditioned boundaries requires an attribute score predictor, so I used the pre-trained unconditioned boundaries to avoid over complicate the work. I was then able to generate myself a handful of conditional boundaries using the function `project_boundary()` in `utils/manipulator.py`, which takes in a primal boundary and another one or two boundaries, and returns the modified primal boundary conditioned on the other boundaries.
