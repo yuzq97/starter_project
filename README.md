@@ -1,23 +1,21 @@
-# Starter Project: An Attempt to Manipulate the Latent Space of StyleGAN for Semantic Face Editing
+# Starter Project: An Attempt to Manipulate the Latent Space of StyleGAN for Face Editing
 
-For this starter project, I played with the latent space of StyleGAN (Karras *et al.*, CVPR 2019) and made an attempt at tackling the disentanglement of facial attributes, a task discussed in the original StyleGAN paper. The goal is to turn an unconditionally trained GAN model into a controllable one, which means that the model can edit a particular facial attribute without affecting another.
+For this starter project, I played with the latent space of StyleGAN (Karras *et al.*, CVPR 2019) and looked into the methods that tackle the disentanglement of facial attributes, a task discussed in the original StyleGAN paper. The goal is to turn an unconditionally trained GAN model into a controllable one, which means that the model can edit a particular facial attribute without affecting another.
 
 While the StyleGAN paper has already found that the intermediate latent space *W* is less entagled by *Z*, there exists another approach proposed in the CVPR paper "Interpreting the Latent Space of GANs for Semantic Face Editing" (Shen *et al.*, CVPR 2020) called "conditional manipulation". The authors of the paper first prove that the latent space *Z* of StyleGAN is separable by a hyperplane given any facial attributes, and then find a projected direction along which moving the latent code changes attribute A without affecting attribute B.
 
-The purpose of this project is thus to try my hand at using a GAN model for face editing, and do a little compare-and-contrast between the two disentanglement methods. I built upon the work of Shen *et al.* a [Colab demo](https://colab.research.google.com/github/yuzq97/starter_project/blob/main/demo.ipynb) that allows users to play around with various combinations of models and boundaries for face editing.
+The purpose of this project is thus to try my hand at using a GAN model for face editing, and do a little compare-and-contrast between the two disentanglement methods. I also built a [Colab demo](https://colab.research.google.com/github/yuzq97/starter_project/blob/main/demo.ipynb) that allows users to play around with various combinations of models and boundaries for face editing.
 
 ## Model for Face Generation
 
-The Tensorflow version of StyleGAN requires a GPU to run, but thanks to Shen *et al.*, I was able to use a PyTorch version of it which supports running on CPU. The model first loads the weights from the pre-trained StyleGAN, randomly samples latent codes which is then linearly interpolated with respect to the given boundary, and finally synthesizes result images from the new latent code.
+The Tensorflow version of StyleGAN requires a GPU to run, but thanks to the work by Shen *et al.*, I was able to use a PyTorch version of it which supports running on CPU. The model first loads the weights from the pre-trained StyleGAN, randomly samples latent codes which is then linearly interpolated with respect to the given boundary, and finally synthesizes result images from the new latent code.
 
 ## Training Process
 The training part of this projects involves finding boundaries for various facial attributes, both unconditioned and conditional ones. Training unconditioned boundaries requires an attribute score predictor, so I used the pre-trained unconditioned boundaries to avoid over complicate the work. I was then able to generate myself a handful of conditional boundaries using the function `project_boundary()` in `utils/manipulator.py`, which takes in a primal boundary and another one or two boundaries, and returns the modified primal boundary conditioned on the other boundaries.
 
 ## Using edit.py
 
-This script is for face editing on local machines.
-
-Before use, please first download StyleGAN models from https://github.com/NVlabs/stylegan, and then put them under `models/pretrain/`. Both StyleGAN models trained on CelebA-HQ and FFHQ dataset are supported.
+This script is for face editing on local machines. Before use, please first download StyleGAN models from https://github.com/NVlabs/stylegan, and then put them under `models/pretrain/`. Both StyleGAN models trained on CelebA-HQ and FFHQ dataset are supported.
 
 ### Arguments:
 
